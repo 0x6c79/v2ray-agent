@@ -1824,7 +1824,8 @@ EOF
 server {
 	${nginxH2Conf}
 	server_name ${domain};
-	root ${nginxStaticPath};
+	root /var/www/blog/;
+    error_page 404 /404.html;
 
     set_real_ip_from 127.0.0.1;
     real_ip_header proxy_protocol;
@@ -1866,7 +1867,8 @@ server {
     real_ip_header proxy_protocol;
 
 	server_name ${domain};
-	root ${nginxStaticPath};
+	root /var/www/blog/;
+    error_page 404 /404.html;
 
 	location /${currentPath}grpc {
 		client_max_body_size 0;
@@ -1892,7 +1894,8 @@ server {
     real_ip_header proxy_protocol;
 
     server_name ${domain};
-	root ${nginxStaticPath};
+	root /var/www/blog/;
+    error_page 404 /404.html;
 
 	location /${currentPath}trojangrpc {
 		client_max_body_size 0;
@@ -1919,7 +1922,8 @@ server {
     real_ip_header proxy_protocol;
 
 	server_name ${domain};
-	root ${nginxStaticPath};
+	root /var/www/blog/;
+    error_page 404 /404.html;
 
 	location / {
 	}
@@ -1935,7 +1939,8 @@ server {
 	set_real_ip_from 127.0.0.1;
 	real_ip_header proxy_protocol;
 
-	root ${nginxStaticPath};
+	root /var/www/blog/;
+    error_page 404 /404.html;
 	location / {
 	}
 }
@@ -7088,9 +7093,9 @@ updateV2RayAgent() {
     echoContent skyBlue "\nProgress$1/${totalProgress}: Update v2ray-agent script"
     rm -rf /etc/v2ray-agent/install.sh
     if [[ "${release}" == "alpine" ]]; then
-        wget -c -q -O /etc/v2ray-agent/install.sh --no-check-certificate "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/shell/install_en.sh"
+        wget -c -q -O /etc/v2ray-agent/install.sh --no-check-certificate "https://raw.githubusercontent.com/0x6c79/v2ray-agent/master/shell/install_en.sh"
     else
-        wget -c -q "${wgetShowProgressStatus}" -O /etc/v2ray-agent/install.sh --no-check-certificate "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/shell/install_en.sh"
+        wget -c -q "${wgetShowProgressStatus}" -O /etc/v2ray-agent/install.sh --no-check-certificate "https://raw.githubusercontent.com/0x6c79/v2ray-agent/master/shell/install_en.sh"
     fi
 
     sudo chmod 700 /etc/v2ray-agent/install.sh
@@ -7101,7 +7106,7 @@ updateV2RayAgent() {
     echoContent yellow " ---> Please manually execute [vasma] to open the script"
     echoContent green " ---> Current version: ${version}\n"
     echoContent yellow "If the update fails, please manually execute the following command\n"
-    echoContent skyBlue "wget -O /root/install.sh --no-check-certificate https://raw.githubusercontent.com/mack-a/v2ray-agent/master/shell/install_en.sh && chmod 700 /root/install.sh && /root/install.sh"
+    echoContent skyBlue "wget -O /root/install.sh --no-check-certificate https://raw.githubusercontent.com/0x6c79/v2ray-agent/master/shell/install_en.sh && chmod 700 /root/install.sh && /root/install.sh"
     echo
     exit 0
 }

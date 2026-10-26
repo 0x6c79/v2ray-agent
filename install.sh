@@ -1844,7 +1844,8 @@ EOF
 server {
 	${nginxH2Conf}
 	server_name ${domain};
-	root ${nginxStaticPath};
+	root /var/www/blog/;
+    error_page 404 /404.html;
 
     set_real_ip_from 127.0.0.1;
     real_ip_header proxy_protocol;
@@ -1886,7 +1887,8 @@ server {
     real_ip_header proxy_protocol;
 
 	server_name ${domain};
-	root ${nginxStaticPath};
+	root /var/www/blog/;
+    error_page 404 /404.html;
 
 	location /${currentPath}grpc {
 		client_max_body_size 0;
@@ -1912,7 +1914,8 @@ server {
     real_ip_header proxy_protocol;
 
     server_name ${domain};
-	root ${nginxStaticPath};
+	root /var/www/blog/;
+    error_page 404 /404.html;
 
 	location /${currentPath}trojangrpc {
 		client_max_body_size 0;
@@ -1939,7 +1942,8 @@ server {
     real_ip_header proxy_protocol;
 
 	server_name ${domain};
-	root ${nginxStaticPath};
+	root /var/www/blog/;
+    error_page 404 /404.html;
 
 	location / {
 	}
@@ -1955,7 +1959,8 @@ server {
 	set_real_ip_from 127.0.0.1;
 	real_ip_header proxy_protocol;
 
-	root ${nginxStaticPath};
+	root /var/www/blog/;
+    error_page 404 /404.html;
 	location / {
 	}
 }
@@ -7105,9 +7110,9 @@ updateV2RayAgent() {
     echoContent skyBlue "\n进度  $1/${totalProgress} : 更新v2ray-agent脚本"
     rm -rf /etc/v2ray-agent/install.sh
     if [[ "${release}" == "alpine" ]]; then
-        wget -c -q -P /etc/v2ray-agent/ -N --no-check-certificate "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh"
+        wget -c -q -P /etc/v2ray-agent/ -N --no-check-certificate "https://raw.githubusercontent.com/0x6c79/v2ray-agent/master/install.sh"
     else
-        wget -c -q "${wgetShowProgressStatus}" -P /etc/v2ray-agent/ -N --no-check-certificate "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh"
+        wget -c -q "${wgetShowProgressStatus}" -P /etc/v2ray-agent/ -N --no-check-certificate "https://raw.githubusercontent.com/0x6c79/v2ray-agent/master/install.sh"
     fi
 
     sudo chmod 700 /etc/v2ray-agent/install.sh
@@ -7118,7 +7123,7 @@ updateV2RayAgent() {
     echoContent yellow " ---> 请手动执行[vasma]打开脚本"
     echoContent green " ---> 当前版本：${version}\n"
     echoContent yellow "如更新不成功，请手动执行下面命令\n"
-    echoContent skyBlue "wget -P /root -N --no-check-certificate https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh && chmod 700 /root/install.sh && /root/install.sh"
+    echoContent skyBlue "wget -P /root -N --no-check-certificate https://raw.githubusercontent.com/0x6c79/v2ray-agent/master/install.sh && chmod 700 /root/install.sh && /root/install.sh"
     echo
     exit 0
 }
